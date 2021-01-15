@@ -65,19 +65,19 @@ class QueryBuilder implements QueryBuilderInterface
         else $this->querystring .= '* ';
 
         $this->querystring = rtrim($this->querystring,', ');
-        $this->querystring .= 'from ' . $this->table . ' ';
+        $this->querystring .= ' from ' . $this->table . ' ';
         $this->querystring .= 'where ';
         foreach ($this->where as $key=>$value) {
-            $this->querystring .= $key . ' = ' . $value;
+            $this->querystring .= $key . ' = ' . "'" . $value . "'";
             $this->querystring .= ' and ';
         }
         $this->querystring = rtrim($this->querystring,'and ');
-        $this->querystring .= 'order by ';
+        $this->querystring .= ' order by ';
         foreach ($this->order as $key=>$value) {
             $this->querystring .= $key . ' ' . $value . ' , ';
         }
         $this->querystring = rtrim($this->querystring,', ');
-        $this->querystring .= 'limit ' . $this->limit . ' ';
+        $this->querystring .= ' limit ' . $this->limit . ' ';
         $this->querystring .= 'offset ' . $this->offset;
 
         return $this->querystring;
